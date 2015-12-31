@@ -11,16 +11,20 @@ primeList = []
 def largestPrime(x):
 	#given x, only check non-even ints greater than 2 and less than
 	#square root of x.
-
-	
-	#this will hold the other term to start the factorization process
-	secondTerm = 0
-	
-	# first check if x is even
-	if (x % 2 == 0):
-		secondTerm = x / 2
-		while(isPrime(secondTerm) == False):
-			
+	temp = 1
+	while (temp > 0):
+		print temp
+		temp = x / 2.0
+		#if(temp % 2 == 0):
+		#	print "in the if"
+		if(isPrime(temp)):
+			return temp
+		else:
+			x = x - 1
+				#temp = temp - 1
+		#else:
+		#	x = x - 1
+			#temp = temp - 1
 
 
 
@@ -32,17 +36,18 @@ def isPrime(x):
 
 	#first check if 2 divides x, if it does, return
 	if(x % 2 == 0):
-		return
-	for i in range(3,intUpperBound):
+		return False
+	for i in range(3,intUpperBound + 1):
 		#exclude evens
 		if(i % 2 != 0):
 			if(x % i == 0):
 				print "here"
-				return
+				return False
 	#if we get here, then x must be prime
+	return True
 	primeList.append(x)
 	print primeList
 
-isPrime(5234320)
-	
+print largestPrime(15)
+
 
