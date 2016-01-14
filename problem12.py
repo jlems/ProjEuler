@@ -22,34 +22,41 @@ Let us list the factors of the first seven triangle numbers:
 
 """
 import math
-theList = []
+
 theSum = 0
-count = 0
+
+numOfDivisors = 1
 
 def generateTriangleNumbers():
 	global theSum
-	
+
 	#generate the triangle numbers in the range of 1 to n and append each 
 	#triangle number to theList
-	for i in range(1,5000):
+	#use a generator to speed things up
+	for i in range(1,15000):
 		theSum = i + theSum
-		theList.append(theSum)
-		
-		
+		#theList.append(theSum)
+		yield (theSum)
 
 
 def triangleNumbers():
-	global count
-	for i in range(0, len(theList)):
-		print "i is " + str(theList[i])
-		for j in range(1, int(math.sqrt(sum(theList)))):
-			if(theList[i] % j == 0):
-				count = count + 1
-				if(count > 450):
-					print theList
-					return theList[i]
-				#print "count for ", i , "is ", count
-		count = 0
+	global numOfDivisors
+	tempReturn = generateTriangleNumbers()
+
+	#for each triangleNumber(num) check if it is divisible by any number up to its
+	#square. If it is, add 2 to the count of numberOfDivisors (we add 2 because
+	#of symmetry)
+	for num in tempReturn:
+		for j in range(1, int(math.sqrt(num))):
+			#print num, numOfDivisors
+			if(num % j == 0):
+				numOfDivisors = numOfDivisors + 2
+				if(numOfDivisors > 500):
+					#print numOfDivisors, num
+					return num
 		
-generateTriangleNumbers()
+		#we went through all the numbers from 1 to sqrt(n), so reset the 
+		#numOfDivisors back to 1
+		numOfDivisors = 1
+
 print triangleNumbers()
