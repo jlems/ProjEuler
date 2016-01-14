@@ -7,8 +7,8 @@ Find the sum of all the primes below two million.
 
 import math
 
-primesList = [2]
-count = 0
+primesList = [2] #2 is always a prime so just put it in there to begin with
+
 def findSum():
 	for i in range(2, 2000000):
 		isPrime(i)
